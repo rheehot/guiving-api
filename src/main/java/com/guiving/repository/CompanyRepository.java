@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CompanyRepository extends JpaRepository<Company,Long> {
 
-    @EntityGraph(attributePaths ={"city","city.country"} )
+    @EntityGraph(attributePaths ={"city","city.country","operatorList"} )
     @Query("select DISTINCT a from Company a")
     List<Company> findAll();
 

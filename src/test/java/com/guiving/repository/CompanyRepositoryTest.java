@@ -17,10 +17,15 @@ public class CompanyRepositoryTest {
     CompanyRepository cp;
 
     @Test
-    @Ignore
     public void findByIdTest() throws Exception{
         Company cm = cp.findById(Long.parseLong("64")).orElseThrow(Exception::new);
         System.out.println("CompanyCompany : " + cm);
+
+    }
+    @Test
+    public void getOpCountTest() throws Exception{
+        Company cm = cp.findById(Long.parseLong("64")).orElseThrow(Exception::new);
+        System.out.println("OpCount : " + cm.getOpCount());
 
     }
 
@@ -28,7 +33,7 @@ public class CompanyRepositoryTest {
     public void findAllTest() throws Exception{
         cp.findAll().stream()
                     .forEach(x->{
-                            System.out.println("element : " + x );
+                            System.out.println("element : " + x +"  opcount  : " + x.getOpCount());
                         }
                     );
     }
