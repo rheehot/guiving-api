@@ -9,5 +9,4 @@ import java.util.Base64;
 @Embeddable
 public class Picture {
     private String url;
-    private Base64 base64str;
 }

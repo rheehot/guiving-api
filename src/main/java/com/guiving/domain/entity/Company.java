@@ -55,7 +55,7 @@ public class Company {
             ,inverseJoinColumns = @JoinColumn(name = "city_idx"))
     private City city;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     private List<Operator> operatorList = new ArrayList<>();
 
     public int getOpCount(){
