@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CityRepository extends JpaRepository<City,Long> {
-    @Query("select c from City c join fetch c.country")
+    @Query("select c from City c ")
     List<City> findAll();
 
 }

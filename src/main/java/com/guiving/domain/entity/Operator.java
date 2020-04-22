@@ -7,7 +7,6 @@ import com.guiving.domain.vo.enums.Gender;
 import com.guiving.domain.vo.enums.JoinType;
 import com.guiving.domain.vo.enums.Language;
 import com.guiving.domain.vo.enums.status.OperatorStatus;
-import com.guiving.utils.enums.converter.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,7 +14,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Date;
 
-@ToString(exclude = "company")
+@ToString
 @NoArgsConstructor
 @Getter
 @Entity

@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RunWith(SpringRunner.class)
@@ -23,6 +24,7 @@ public class CompanyRepositoryTest {
 
     }
     @Test
+    @Transactional
     public void getOpCountTest() throws Exception{
         Company cm = cp.findById(Long.parseLong("64")).orElseThrow(Exception::new);
         System.out.println("OpCount : " + cm.getOpCount());
@@ -30,10 +32,13 @@ public class CompanyRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void findAllTest() throws Exception{
         cp.findAll().stream()
                     .forEach(x->{
-                            System.out.println("element : " + x +"  opcount  : " + x.getOpCount());
+                            System.out.println("element : " + x +"  opcount  : " + x.getOperatorList().size());
+                            System.out.println("element : " + x +"  gvcount  : " + x.getGuiverList().size());
+                            //System.out.println("element : " + x);
                         }
                     );
     }

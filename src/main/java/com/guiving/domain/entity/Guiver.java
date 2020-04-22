@@ -8,8 +8,8 @@ import com.guiving.domain.vo.enums.Gender;
 import com.guiving.domain.vo.enums.GuiverType;
 import com.guiving.domain.vo.enums.JoinType;
 import com.guiving.domain.vo.enums.Language;
+import com.guiving.domain.vo.enums.status.GuiverCompanyStatus;
 import com.guiving.domain.vo.enums.status.GuiverStatus;
-import com.guiving.utils.enums.converter.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -51,6 +51,9 @@ public class Guiver {
     @Column(name="guiver_status")
     private GuiverStatus status;
 
+    @Column(name="guiver_company_status")
+    private GuiverCompanyStatus companyStatus;
+
     @Column(name="guiver_type")
     private JoinType joinType;
 
@@ -91,13 +94,13 @@ public class Guiver {
     private Address address;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinTable(name = "TB_GUIVER_CITY"
             , joinColumns = @JoinColumn(name="guiver_idx")
             ,inverseJoinColumns = @JoinColumn(name = "city_idx"))
     private City city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "guiver_company_idx")
     private Company company;
 }

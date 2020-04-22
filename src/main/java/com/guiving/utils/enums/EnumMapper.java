@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.guiving.interfaces.CodeEnum;
-import com.guiving.web.dto.EnumValueDto;
+import com.guiving.domain.vo.enums.status.web.dto.EnumValueDto;
 
 public class EnumMapper {
     private Map<String, List<EnumValueDto>> factory = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.guiving.web.dto;
+package com.guiving.domain.vo.enums.status.web.dto;
 
 import com.guiving.interfaces.CodeEnum;
 

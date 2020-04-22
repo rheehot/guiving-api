@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@ToString(exclude = "operatorList")
+@ToString(exclude = {"operatorList","guiverList"})
 @NoArgsConstructor
 @Getter
 @Entity
@@ -22,20 +22,17 @@ public class Company {
     private Long id;
 
     @Column(name="com_name")
-    private String comName;
+    private String name;
 
     @Column(name="com_owner_name")
-    private String comOwnerName;
+    private String ownerName;
 
     @Temporal(TemporalType.DATE)
     @Column(name="com_build_date")
-    private Date comBuildDate;
+    private Date buildDate;
 
     @Column(name="com_biz_num")
-    private String comBizNum;
-
-    @Column(name="com_biz_license_url")
-    private String comBizLicenseUrl;
+    private String bizNum;
 
     @Column(name="com_auth_code")
     private String comAuthCode;
@@ -49,16 +46,22 @@ public class Company {
     private Address address;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinTable(name = "TB_COM_CITY"
             , joinColumns = @JoinColumn(name="com_idx")
             ,inverseJoinColumns = @JoinColumn(name = "city_idx"))
     private City city;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company")
     private List<Operator> operatorList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "company")
+    private List<Guiver> guiverList = new ArrayList<>();
 
     public int getOpCount(){
         return operatorList.size();
+    }
+    public int getGuiverCount(){
+        return guiverList.size();
     }
 }
