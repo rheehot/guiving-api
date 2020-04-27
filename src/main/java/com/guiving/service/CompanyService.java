@@ -1,7 +1,7 @@
 package com.guiving.service;
 
-import com.guiving.repository.CompanyRepository;
-import com.guiving.domain.vo.enums.status.web.dto.CompanyListResponseDto;
+import com.guiving.domain.company.CompanyRepository;
+import com.guiving.web.dto.CompanyListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -20,6 +20,10 @@ public class EnumValueConvertUtils {
     }
 
     public static <T extends Enum<T> & CodeEnum> String toDBcode(T enumValue) {
+        if(enumValue == null)
+            return "";
+
+
         return enumValue.getCode();
     }
 }

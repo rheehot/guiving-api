@@ -10,6 +10,6 @@ public class DeviceTypeConverter extends AbstractEnumAttributeConverter<DeviceTy
     public static final String ENUM_NAME = "디바이스 종류";
 
     public DeviceTypeConverter(){
-        super(DeviceType.class,false,ENUM_NAME);
+        super(DeviceType.class,true,ENUM_NAME);
     }
 }

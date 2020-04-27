@@ -9,6 +9,6 @@ public class LanguageConverter extends AbstractEnumAttributeConverter<Language>{
     public static final String ENUM_NAME = "사용 언어";
 
     public LanguageConverter(){
-        super(Language.class,false,ENUM_NAME);
+        super(Language.class,true,ENUM_NAME);
     }
 }
