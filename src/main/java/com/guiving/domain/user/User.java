@@ -1,7 +1,8 @@
 package com.guiving.domain.user;
 
-import com.guiving.domain.vo.MobilePhone;
+import com.guiving.domain.vo.DeviceInfo;
 import com.guiving.domain.vo.Name;
+import com.guiving.domain.vo.PhoneNumber;
 import com.guiving.domain.vo.Picture;
 import com.guiving.domain.vo.enums.JoinType;
 import com.guiving.domain.vo.enums.Language;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -67,45 +69,55 @@ public class User {
     })
     private Name name;
 
+
+    @Embedded
+    @AttributeOverride(name = "phoneNumber", column = @Column(name = "user_phone_num"))
+    private PhoneNumber phoneNumber;
+
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "phoneNumber", column = @Column(name = "user_phone_num")),
             @AttributeOverride(name = "deviceModel", column = @Column(name = "user_device_model")),
             @AttributeOverride(name = "deviceType", column = @Column(name = "user_device_type")),
             @AttributeOverride(name = "deviceOS", column = @Column(name = "user_device_os_version")),
             @AttributeOverride(name = "appVersion", column = @Column(name = "user_app_version")),
             @AttributeOverride(name = "deviceToken", column = @Column(name = "user_device_token"))
     })
-    private MobilePhone mobilePhone;
+    private DeviceInfo deviceInfo;
 
     @OneToMany(mappedBy = "user")
     private Set<Card> cardSet = new LinkedHashSet<>();
 
     @Builder
-    public User(Long id, String email, String password, String uid, String nation,
-                JoinType joinType, Language language, Picture picture, Name name, MobilePhone mobilePhone) {
+    public User(Long id, String email, String password, String uid, String nation, PhoneNumber phoneNumber,
+                JoinType joinType, Language language, Picture picture, Name name, DeviceInfo deviceInfo) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.uid = uid;
         this.joinType = joinType;
+        this.phoneNumber = phoneNumber;
         this.language = language;
         this.picture = picture;
         this.name = name;
-        this.mobilePhone = mobilePhone;
+        this.deviceInfo = deviceInfo;
         this.nation = nation;
     }
 
-    public void updateInfo(UserUpdateRequestDto requestDto){
-        if(ObjectUtils.isEmpty(requestDto.getName()))
+    public void updateInfo(UserUpdateRequestDto requestDto) {
+        if (ObjectUtils.isEmpty(requestDto.getName()))
             throw new IllegalArgumentException("요청 파라미터가 NULL입니다.");
-        this.name = requestDto.getName();
-        this.mobilePhone.setPhoneNumber(requestDto.getPhoneNumber());
+
+        if (requestDto.getName().isValidated())
+            this.name = requestDto.getName();
+
         this.language = Language.valueOf(requestDto.getLanguage());
+
+        if (StringUtils.isNotEmpty(requestDto.getPhoneNumber()))
+            this.phoneNumber.setPhoneNumber(requestDto.getPhoneNumber());
         this.nation = requestDto.getNation();
     }
 
-    public void updatePassword(String password){
+    public void updatePassword(String password) {
         this.password = password;
     }
 }

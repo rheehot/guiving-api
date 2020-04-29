@@ -12,4 +12,7 @@ public interface CompanyRepository extends JpaRepository<Company,Long> {
     @Query("select DISTINCT a from Company a join fetch a.city ct ")
     List<Company> findAll();
 
+    List<Company> findAllByBizNum(String bizNum);
+
+    Company findByAuthCode(String authCode);
 }

@@ -13,7 +13,8 @@ import javax.persistence.Embeddable;
 public enum DeviceType implements CodeEnum {
 
     ANDROID("0", "android"),
-    IOS("1", "iOS");
+    IOS("1", "iOS"),
+    NONE("99", "NONE");
 
     private String code;
     private String comment;

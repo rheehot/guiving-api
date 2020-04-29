@@ -5,8 +5,10 @@ import com.guiving.domain.vo.enums.CityCode;
 import com.guiving.domain.vo.enums.Currency;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.ObjectUtils;
 
+@EqualsAndHashCode
 @Data
 public class CityInfo {
     private CityCode cityCode;

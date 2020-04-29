@@ -28,17 +28,19 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserResponseDto findById(Long id){
-        User user =  userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("user가 존재하지 않습니다. id : " + id));
+        User user =  findUserById(id);
         return new UserResponseDto(user);
     }
 
     @Transactional
     public void update(Long id, UserUpdateRequestDto request){
-        User user =  userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("user가 존재하지 않습니다. id : " + id));
+        User user =  findUserById(id);
         user.updateInfo(request);
+    }
 
+    private User findUserById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("user가 존재하지 않습니다. id : " + id));
     }
 
 

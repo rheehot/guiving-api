@@ -1,8 +1,9 @@
 package com.guiving.web.dto.user;
 
 import com.guiving.domain.user.User;
-import com.guiving.domain.vo.MobilePhone;
+import com.guiving.domain.vo.DeviceInfo;
 import com.guiving.domain.vo.Name;
+import com.guiving.domain.vo.PhoneNumber;
 import com.guiving.domain.vo.enums.DeviceType;
 import com.guiving.domain.vo.enums.JoinType;
 import com.guiving.domain.vo.enums.Language;
@@ -47,7 +48,8 @@ public class UserSaveRequestDto {
                 .language(Language.valueOf(language))
                 .joinType(JoinType.valueOf(joinType))
                 .password(password)
-                .mobilePhone(MobilePhone.builder().deviceType(DeviceType.valueOf(deviceType)).phoneNumber(phoneNumber).build())
+                .phoneNumber(PhoneNumber.builder().phoneNumber(phoneNumber).build())
+                .deviceInfo(DeviceInfo.builder().deviceType(DeviceType.valueOf(deviceType)).build())
                 .nation(nation)
                 .build();
     }

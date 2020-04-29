@@ -24,12 +24,11 @@ public class GuiverController {
     private final GuiverService guiverService;
 
     @PostMapping("/api/v1/guiver")
-    public ResponseEntity<?> save(JoinType request) throws Exception {
-        logger.debug("requestdto  : "  + request);
+    public ResponseEntity<?> save(GuiverSaveRequestDto request) throws Exception {
         ResponseEntity<?> result;
         try {
-            //Long id = guiverService.save(request);
-            result = new ResponseEntity<>(HttpStatus.OK) ;
+            Long id = guiverService.save(request);
+            result = new ResponseEntity<>(guiverService.findById(id),HttpStatus.OK) ;
         }
         catch(Exception e) {
             e.printStackTrace();

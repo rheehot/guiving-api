@@ -1,10 +1,11 @@
-package com.guiving.web.dto;
+package com.guiving.web.dto.company;
 
 import com.guiving.domain.company.Company;
 import com.guiving.domain.vo.CityInfo;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -17,12 +18,12 @@ public class CompanyListResponseDto {
     private CityInfo cityInfo;
     private int opCount;
     private int guiverCount;
-    private Date buildDate;
+    private LocalDate buildDate;
 
     public CompanyListResponseDto(Company company) {
         this.id = company.getId();
         this.name = company.getName();
-        this.authCode = company.getComAuthCode();
+        this.authCode = company.getAuthCode();
         this.ownerName = company.getOwnerName();
         this.cityInfo = new CityInfo(company.getCity());
         this.opCount = company.getOpCount();

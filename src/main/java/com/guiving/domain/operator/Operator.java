@@ -1,22 +1,27 @@
 package com.guiving.domain.operator;
 
 import com.guiving.domain.company.Company;
-import com.guiving.domain.vo.MobilePhone;
+import com.guiving.domain.vo.DeviceInfo;
 import com.guiving.domain.vo.Name;
+import com.guiving.domain.vo.PhoneNumber;
 import com.guiving.domain.vo.Picture;
-import com.guiving.domain.vo.enums.Gender;
-import com.guiving.domain.vo.enums.JoinType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.domain.vo.enums.*;
 import com.guiving.domain.vo.enums.status.OperatorStatus;
+import com.guiving.web.dto.operator.OperatorUpdateRequestDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.commons.lang3.ObjectUtils;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @ToString
 @NoArgsConstructor
+@DynamicUpdate
 @Getter
 @Entity
 @Table(name="TB_OPERATOR")
@@ -35,19 +40,24 @@ public class Operator {
     @Column(name="op_uid")
     private String uid;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "op_join_date")
-    private Date joinDate;
+    @Column(name="op_terms_agree_yn")
+    private String termsAgree;
 
-    @Temporal(TemporalType.DATE)
+    @Column(name = "op_join_date")
+    private LocalDate joinDate;
+
     @Column(name = "op_birth")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name="op_gender")
     private Gender gender;
 
     @Column(name="op_status")
     private OperatorStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="op_exc_symbol")
+    private Currency currency;
 
     @Column(name = "op_type")
     private JoinType joinType;
@@ -66,18 +76,59 @@ public class Operator {
     })
     private Name name;
 
+
+    @Embedded
+    @AttributeOverride(name = "phoneNumber",column = @Column(name = "op_phone_num"))
+    private PhoneNumber phoneNumber;
+
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "phoneNumber",column = @Column(name = "op_phone_num")),
             @AttributeOverride(name = "deviceModel",column = @Column(name = "op_device_model")),
             @AttributeOverride(name = "deviceType",column = @Column(name = "op_device_type")),
             @AttributeOverride(name = "deviceOS",column = @Column(name = "op_device_os_version")),
             @AttributeOverride(name = "appVersion",column = @Column(name = "op_app_version")),
             @AttributeOverride(name = "deviceToken",column = @Column(name = "op_device_token"))
     })
-    private MobilePhone mobilePhone;
+    private DeviceInfo deviceInfo;
 
     @ManyToOne
     @JoinColumn(name = "op_company_idx")
     private Company company;
+
+    @Builder
+    public Operator(String email, String password, String uid,
+                    LocalDate birthDate, Gender gender, JoinType joinType,
+                    Language language, Picture picture, Name name, PhoneNumber phoneNumber) {
+        this.email = email;
+        this.password = password;
+        this.termsAgree = "Y";
+        this.currency = Currency.USD;
+        this.uid = uid;
+        this.joinDate = LocalDate.now();
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.status = OperatorStatus.JOINED;
+        this.joinType = joinType;
+        this.language = language;
+        this.picture = picture;
+        this.deviceInfo = DeviceInfo.builder().deviceType(DeviceType.NONE).build();
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCompany(Company company){
+        this.company = company;
+        company.addOperator(this);
+    }
+
+    public void updateInfo(OperatorUpdateRequestDto requestDto){
+        if(requestDto.getName().isValidated())
+            this.name = requestDto.getName();
+
+        if(ObjectUtils.isNotEmpty(requestDto.getBirthDate()))
+            this.birthDate = requestDto.getBirthDate();
+
+        if(requestDto.getPhoneNumber().isValidated())
+            this.phoneNumber = requestDto.getPhoneNumber();
+    }
 }

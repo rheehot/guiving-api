@@ -6,6 +6,7 @@ import com.guiving.domain.vo.Name;
 import com.guiving.domain.vo.enums.DeviceType;
 import com.guiving.domain.vo.enums.JoinType;
 import com.guiving.domain.vo.enums.Language;
+import com.guiving.utils.CoreUtils;
 import com.guiving.web.dto.user.UserResponseDto;
 import com.guiving.web.dto.user.UserSaveRequestDto;
 import com.guiving.web.dto.user.UserUpdateRequestDto;
@@ -18,6 +19,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
@@ -26,20 +30,24 @@ public class UserServiceTest {
     UserService userService;
     @Autowired
     UserRepository userRepository;
+
+    List<User> list = new ArrayList<>();
     @Before
     public void setUp() throws Exception {
     }
 
     @After
     public void tearDown() throws Exception {
-        //userRepository.deleteAll();
+        list.forEach(
+                x-> userRepository.deleteById(x.getId())
+        );
     }
 
     @Test
     @Transactional
     public void save() throws Exception{
         UserSaveRequestDto dto = UserSaveRequestDto.builder()
-                .email("email123123@email.com")
+                .email(CoreUtils.getRandomStr()+"@email.com")
                 .firstName("firstName")
                 .lastName("lastName")
                 .joinType(JoinType.EMAIL.getKey())

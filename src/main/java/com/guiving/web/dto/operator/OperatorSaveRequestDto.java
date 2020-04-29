@@ -1,6 +1,7 @@
-package com.guiving.web.dto.guiver;
+package com.guiving.web.dto.operator;
 
 import com.guiving.domain.guiver.Guiver;
+import com.guiving.domain.operator.Operator;
 import com.guiving.domain.vo.DeviceInfo;
 import com.guiving.domain.vo.Name;
 import com.guiving.domain.vo.PhoneNumber;
@@ -13,10 +14,9 @@ import java.time.LocalDate;
 
 @Getter
 @ToString
-public class GuiverSaveRequestDto {
+public class OperatorSaveRequestDto {
     private Name name;
     private String email;
-    private GuiverType type;
     private LocalDate birthDate;
     private Gender gender;
     private String uid;
@@ -27,35 +27,32 @@ public class GuiverSaveRequestDto {
     private CityCode cityCode;
 
     @Builder
-    public GuiverSaveRequestDto(Name name, String email, String type,
-                                LocalDate birthDate, String gender, String uid, String language,
-                                String joinType, String password, String phoneNumber, String deviceType,
-                                String cityCode) {
+    public OperatorSaveRequestDto(Name name, String email, LocalDate birthDate, Gender gender,
+                                  String uid, PhoneNumber phoneNumber, Language language, JoinType joinType,
+                                  String password, CityCode cityCode) {
         this.name = name;
         this.email = email;
-        this.type = GuiverType.valueOf(type);
         this.birthDate = birthDate;
-        this.gender = Gender.valueOf(gender);
-        this.language = Language.valueOf(language);
+        this.gender = gender;
         this.uid = uid;
-        this.phoneNumber = PhoneNumber.builder().phoneNumber(phoneNumber).build();
-        this.joinType = JoinType.valueOf(joinType);
+        this.phoneNumber = phoneNumber;
+        this.language = language;
+        this.joinType = joinType;
         this.password = password;
-        this.cityCode = CityCode.valueOf(cityCode);
+        this.cityCode = cityCode;
     }
 
-    public Guiver toEntity(){
-        return Guiver.builder()
+    public Operator toEntity(){
+        return Operator.builder()
                 .name(name)
                 .email(email)
-                .type(type)
-                .language(language)
                 .birthDate(birthDate)
-                .gender(gender)
                 .uid(uid)
+                .gender(gender)
+                .phoneNumber(phoneNumber)
+                .language(language)
                 .joinType(joinType)
                 .password(password)
-                .phoneNumber(phoneNumber)
                 .build();
     }
 }

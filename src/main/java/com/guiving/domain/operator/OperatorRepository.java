@@ -13,4 +13,7 @@ public interface OperatorRepository extends JpaRepository<Operator,Long> {
     @Query("select DISTINCT o from Operator o")
     List<Operator> findAll();
 
+
+    List<Operator> findAllByEmail(String email);
+
 }

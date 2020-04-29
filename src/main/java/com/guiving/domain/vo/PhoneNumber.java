@@ -9,22 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 import javax.persistence.Embeddable;
 
 @NoArgsConstructor
-@Data
 @EqualsAndHashCode
+@Data
 @Embeddable
-public class Address {
-    private String state;
-    private String city;
-    private String street;
+public class PhoneNumber {
+    private String phoneNumber;
 
     @Builder
-    public Address(String state, String city, String street) {
-        this.state = state;
-        this.city = city;
-        this.street = street;
+    public PhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean isValidated(){
-        return StringUtils.isNoneBlank(state,city,state);
+        return StringUtils.isNotBlank(phoneNumber);
     }
 }

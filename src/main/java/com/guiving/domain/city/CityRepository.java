@@ -12,6 +12,6 @@ public interface CityRepository extends JpaRepository<City,Long> {
     @Query("select c from City c ")
     List<City> findAll();
 
-    Optional<City> findByCode(CityCode cityCode);
+    City findByCode(CityCode cityCode);
 
 }
