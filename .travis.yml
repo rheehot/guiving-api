@@ -1,5 +1,6 @@
 language: java
-jdk: oraclejdk8
+jdk:
+  - openjdk8
 
 branches:
   only:
@@ -14,8 +15,6 @@ cache:
     - '$HOME/.m2/repository'
 
 script: "./mvn clean build"
-
-
 
 # CI 실행 완료시 메일로 알람
 notifications:
