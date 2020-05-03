@@ -122,13 +122,13 @@ public class Operator {
     }
 
     public void updateInfo(OperatorUpdateRequestDto requestDto){
-        if(requestDto.getName().isValidated())
+        if(requestDto.getName().isValid())
             this.name = requestDto.getName();
 
         if(ObjectUtils.isNotEmpty(requestDto.getBirthDate()))
             this.birthDate = requestDto.getBirthDate();
 
-        if(requestDto.getPhoneNumber().isValidated())
+        if(requestDto.getPhoneNumber().isValid())
             this.phoneNumber = requestDto.getPhoneNumber();
     }
 }

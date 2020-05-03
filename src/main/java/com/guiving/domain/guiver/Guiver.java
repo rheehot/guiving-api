@@ -175,7 +175,7 @@ public class Guiver {
     }
 
     public void updateInfo(GuiverUpdateRequestDto requestDto) {
-        if (requestDto.getName().isValidated())
+        if (requestDto.getName().isValid())
             this.name = requestDto.getName();
         if (ObjectUtils.isNotEmpty(requestDto.getBirthDate()))
             this.birthDate = requestDto.getBirthDate();

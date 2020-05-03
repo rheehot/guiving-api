@@ -3,6 +3,7 @@ package com.guiving.service;
 import com.guiving.domain.user.User;
 import com.guiving.domain.user.UserRepository;
 import com.guiving.domain.vo.Name;
+import com.guiving.domain.vo.PhoneNumber;
 import com.guiving.domain.vo.enums.DeviceType;
 import com.guiving.domain.vo.enums.JoinType;
 import com.guiving.domain.vo.enums.Language;
@@ -81,10 +82,8 @@ public class UserServiceTest {
     @Test
     public void update() throws Exception{
         UserUpdateRequestDto dto = UserUpdateRequestDto.builder()
-                .name(Name.builder().firstName("memememe").lastName("ssssss").build())
-                .language(Language.KOREAN.getKey().toString())
-                .phoneNumber("29494941924912")
-                .nation("미국")
+                .name(Name.builder().firstName("firstNAme").lastName("lastNAme").build())
+                .phoneNumber(PhoneNumber.builder().phoneNumber("01010101010").build())
                 .build();
 
         Long id = Long.parseLong("88");

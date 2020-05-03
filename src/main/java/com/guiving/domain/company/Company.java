@@ -117,7 +117,7 @@ public class Company {
         this.ownerName = requestDto.getOwnerName();
         if(ObjectUtils.isNotEmpty(requestDto.getBuilDate()))
             this.buildDate = requestDto.getBuilDate();
-        if(requestDto.getAddress().isValidated())
+        if(requestDto.getAddress().isValid())
             this.address = requestDto.getAddress();
     }
 }

@@ -23,7 +23,7 @@ public class Name {
         return firstName+" " + lastName;
     }
 
-    public boolean isValidated(){
+    public boolean isValid(){
         return StringUtils.isNoneBlank(firstName,lastName);
     }
 }

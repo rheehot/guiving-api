@@ -107,14 +107,17 @@ public class User {
         if (ObjectUtils.isEmpty(requestDto.getName()))
             throw new IllegalArgumentException("요청 파라미터가 NULL입니다.");
 
-        if (requestDto.getName().isValidated())
+        if (requestDto.getName().isValid())
             this.name = requestDto.getName();
 
-        this.language = Language.valueOf(requestDto.getLanguage());
+        if(ObjectUtils.isNotEmpty(requestDto.getLanguage()))
+            this.language = requestDto.getLanguage();
 
-        if (StringUtils.isNotEmpty(requestDto.getPhoneNumber()))
-            this.phoneNumber.setPhoneNumber(requestDto.getPhoneNumber());
-        this.nation = requestDto.getNation();
+        if (requestDto.getPhoneNumber().isValid())
+            this.phoneNumber = requestDto.getPhoneNumber();
+
+        if(ObjectUtils.isNotEmpty(requestDto.getNation()))
+            this.nation = requestDto.getNation();
     }
 
     public void updatePassword(String password) {

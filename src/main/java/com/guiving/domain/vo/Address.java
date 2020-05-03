@@ -24,7 +24,7 @@ public class Address {
         this.street = street;
     }
 
-    public boolean isValidated(){
+    public boolean isValid(){
         return StringUtils.isNoneBlank(state,city,state);
     }
 }

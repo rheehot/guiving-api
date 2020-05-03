@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 public class NameTest {
 
     @Test
-    public void isValidated() {
+    public void isValid() {
         Name name = Name.builder().firstName("sdfsdf").lastName("").build();
-        System.out.println("isValidated : " + name.isValidated());
+        System.out.println("isValid : " + name.isValid());
     }
 }

@@ -20,7 +20,7 @@ public class PhoneNumber {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isValidated(){
+    public boolean isValid(){
         return StringUtils.isNotBlank(phoneNumber);
     }
 }
