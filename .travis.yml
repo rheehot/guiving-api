@@ -1,18 +1,21 @@
 language: java
-jdk:
-  - openjdk8
+jdk: oraclejdk8
 
 branches:
   only:
     - master
 
+before_install:
+  - chmod +x mvnw
+
 # Travis CI 서버의 Home
 cache:
   directories:
     - '$HOME/.m2/repository'
-    - '$HOME/.mvn'
 
 script: "./mvn clean build"
+
+
 
 # CI 실행 완료시 메일로 알람
 notifications:
