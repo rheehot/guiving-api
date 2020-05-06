@@ -41,7 +41,7 @@ public class VehicleServiceTest {
                 .year("3919")
                 .modelId(Long.parseLong("3"))
                 .ownerType(Provider.GUIVER)
-                .ownerId(Long.parseLong("134"))
+                .ownerId(Long.parseLong("127"))
                 .build();
 
         Long id = vehicleService.save(dto);

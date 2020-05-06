@@ -9,6 +9,7 @@ import com.guiving.vo.enums.*;
 import com.guiving.web.dto.guiver.*;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class GuiverServiceTest {
 
     @After
     public void After(){
+
         list.forEach(x -> guiverRepository.deleteById(x.getId()));
     }
 
@@ -102,7 +104,7 @@ public class GuiverServiceTest {
                 .personalInfo(personalInfoDto)
                 .license(guiverLicenseDto)
                 .build();
-        Long id = Long.parseLong("134");
+        Long id = Long.parseLong("109");
         guiverService.register(id,dto);
 
         Guiver guiver = guiverRepository.findById(id)
