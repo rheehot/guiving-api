@@ -51,6 +51,8 @@ public class VehicleServiceTest {
 
         System.out.println("inserted vehicle : " + vehicle);
 
+        list.add(vehicle);
+
 
 
 
@@ -73,6 +75,7 @@ public class VehicleServiceTest {
                 .orElseThrow(() -> new IllegalArgumentException("vehicle does not exist"));
 
         System.out.println("inserted vehicle : " + vehicle);
+        list.add(vehicle);
     }
 
     @Test
