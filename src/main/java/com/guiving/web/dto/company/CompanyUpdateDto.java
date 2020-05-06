@@ -1,9 +1,7 @@
 package com.guiving.web.dto.company;
 
-import com.guiving.domain.company.Company;
-import com.guiving.domain.vo.Address;
-import com.guiving.domain.vo.CityInfo;
-import com.guiving.domain.vo.enums.CityCode;
+import com.guiving.vo.Address;
+import com.guiving.vo.enums.CityCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

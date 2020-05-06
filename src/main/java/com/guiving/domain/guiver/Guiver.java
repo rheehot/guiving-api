@@ -3,10 +3,12 @@ package com.guiving.domain.guiver;
 import com.guiving.domain.company.Company;
 import com.guiving.domain.city.City;
 import com.guiving.domain.vehicle.Vehicle;
-import com.guiving.domain.vo.*;
-import com.guiving.domain.vo.enums.*;
-import com.guiving.domain.vo.enums.status.GuiverCompanyStatus;
-import com.guiving.domain.vo.enums.status.GuiverStatus;
+import com.guiving.vo.*;
+import com.guiving.vo.enums.*;
+import com.guiving.vo.enums.status.GuiverCompanyStatus;
+import com.guiving.vo.enums.status.GuiverStatus;
+import com.guiving.web.dto.guiver.GuiverLicenseDto;
+import com.guiving.web.dto.guiver.GuiverPersonalInfoDto;
 import com.guiving.web.dto.guiver.GuiverUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -73,7 +75,7 @@ public class Guiver {
 
     @Embedded
     @AttributeOverride(name = "url", column = @Column(name = "guiver_img_url"))
-    private Picture picture;
+    private Picture profile;
 
     @Embedded
     @AttributeOverrides({
@@ -121,23 +123,23 @@ public class Guiver {
     @Column(name = "guiver_fee_grade")
     private Long feeGrade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "guiver_fee_grade", referencedColumnName = "guiver_fee_grade", insertable = false, updatable = false)
     private GuiverFee fee;
 
     @OneToOne(mappedBy = "guiver", cascade = CascadeType.ALL, orphanRemoval = true)
-    CriminalReport criminalReport;
+    private CriminalReport criminalReport;
 
     @OneToOne(mappedBy = "guiver", cascade = CascadeType.ALL, orphanRemoval = true)
-    ProofOfResidency proofOfResidency;
+    private ProofOfResidency proofOfResidency;
 
     @OneToOne(mappedBy = "guiver", cascade = CascadeType.ALL, orphanRemoval = true)
-    DriverLicense driverLicense;
+    private DriverLicense driverLicense;
 
 
     @Builder
     public Guiver(String email, String password, String uid, LocalDate birthDate, Gender gender,
-                  JoinType joinType, GuiverType type, Language language, Picture picture, Name name,
+                  JoinType joinType, GuiverType type, Language language, Picture profile, Name name,
                   PhoneNumber phoneNumber, Address address, City city) {
         this.email = email;
         this.password = password;
@@ -151,7 +153,7 @@ public class Guiver {
         this.joinType = joinType;
         this.type = type;
         this.language = language;
-        this.picture = picture;
+        this.profile = profile;
         this.name = name;
         this.deviceInfo = DeviceInfo.builder().deviceType(DeviceType.NONE).build();
         this.address = address;
@@ -164,14 +166,32 @@ public class Guiver {
         this.currency = city.getCurrency();
     }
 
-    public void setCriminalReport(CriminalReport criminalReport) {
+    public void setCompany(Company company){
+        this.company = company;
+        company.addGuiver(this);
+    }
+
+    private void setCriminalReport(CriminalReport criminalReport) {
         this.criminalReport = criminalReport;
         criminalReport.setGuiver(this);
     }
 
-    public void setDriverLicense(DriverLicense driverLicense) {
+    private void setProofOfResidency(ProofOfResidency proofOfResidency){
+        this.proofOfResidency = proofOfResidency;
+        proofOfResidency.setGuiver(this);
+    }
+
+    public void setDriverLicense(GuiverLicenseDto requestDto) {
+        DriverLicense driverLicense = DriverLicense.builder()
+                .licenseNum(requestDto.getLicenseNum())
+                .expiredDate(requestDto.getExpiredDate())
+                .picture(requestDto.getLicensePic())
+                .build();
         this.driverLicense = driverLicense;
         driverLicense.setGuiver(this);
+    }
+    public void setVehicle(Vehicle vehicle){
+        this.vehicle = vehicle;
     }
 
     public void updateInfo(GuiverUpdateRequestDto requestDto) {
@@ -183,8 +203,34 @@ public class Guiver {
             this.phoneNumber.setPhoneNumber(requestDto.getPhoneNumber());
     }
 
+    public void registerInfo(GuiverPersonalInfoDto requestDto){
+        this.status = GuiverStatus.STANDBY;
+
+        if(requestDto.getProfile().isValid())
+            this.profile = requestDto.getProfile();
+        if(requestDto.getAddress().isValid())
+            this.address = requestDto.getAddress();
+
+        ProofOfResidency proofOfResidency = ProofOfResidency.builder()
+                .picture(requestDto.getIdCard()).build();
+        setProofOfResidency(proofOfResidency);
+
+        CriminalReport criminalReport = CriminalReport.builder()
+                .picture(requestDto.getPoliceClearance()).build();
+        setCriminalReport(criminalReport);
+    }
+
+    public void approval(){
+        if(this.status.equals(GuiverStatus.JOINED))
+            throw new IllegalArgumentException("Guiver can not be allowed before registration");
+
+        this.status = GuiverStatus.COMPLETED;
+    }
+
     public void updatePassword(String password) {
         if (StringUtils.isNotEmpty(password))
             this.password = password;
     }
+
+
 }

@@ -1,12 +1,8 @@
 package com.guiving.web.dto.operator;
 
-import com.guiving.domain.operator.Operator;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.enums.CityCode;
-import com.guiving.domain.vo.enums.Gender;
-import com.guiving.domain.vo.enums.JoinType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.enums.Language;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

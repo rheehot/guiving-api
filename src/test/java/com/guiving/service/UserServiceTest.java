@@ -2,11 +2,11 @@ package com.guiving.service;
 
 import com.guiving.domain.user.User;
 import com.guiving.domain.user.UserRepository;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.enums.DeviceType;
-import com.guiving.domain.vo.enums.JoinType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.enums.DeviceType;
+import com.guiving.vo.enums.JoinType;
+import com.guiving.vo.enums.Language;
 import com.guiving.utils.CoreUtils;
 import com.guiving.web.dto.user.UserResponseDto;
 import com.guiving.web.dto.user.UserSaveRequestDto;

@@ -1,7 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.CityCode;
-import com.guiving.domain.vo.enums.Gender;
+import com.guiving.vo.enums.CityCode;
 
 import javax.persistence.Converter;
 

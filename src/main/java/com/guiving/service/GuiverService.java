@@ -2,8 +2,10 @@ package com.guiving.service;
 
 import com.guiving.domain.city.City;
 import com.guiving.domain.city.CityRepository;
-import com.guiving.domain.guiver.Guiver;
-import com.guiving.domain.guiver.GuiverRepository;
+import com.guiving.domain.company.Company;
+import com.guiving.domain.company.CompanyRepository;
+import com.guiving.domain.guiver.*;
+import com.guiving.web.dto.guiver.GuiverRegisterRequestDto;
 import com.guiving.web.dto.guiver.GuiverResponseDto;
 import com.guiving.web.dto.guiver.GuiverSaveRequestDto;
 import com.guiving.web.dto.guiver.GuiverUpdateRequestDto;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class GuiverService {
     private final GuiverRepository guiverRepository;
     private final CityRepository cityRepository;
+    private final CompanyRepository companyRepository;
 
     @Transactional
     public Long save(GuiverSaveRequestDto request) {
@@ -47,9 +50,29 @@ public class GuiverService {
         guiver.updateInfo(request);
     }
 
+    @Transactional
+    public void register(Long id, GuiverRegisterRequestDto request){
+        Guiver guiver = findGuiverById(id);
+
+        guiver.registerInfo(request.getPersonalInfo());
+
+        guiver.setDriverLicense(request.getLicense());
+
+        Company company = companyRepository.findByAuthCode(request.getAuthCode());
+        guiver.setCompany(company);
+
+    }
+
+    @Transactional
+    public void approval(Long id){
+        Guiver guiver = findGuiverById(id);
+        guiver.approval();
+    }
+
     private Guiver findGuiverById(Long id){
         return guiverRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("GUIVER Doen't exist id : " + id));
     }
+
 
 }

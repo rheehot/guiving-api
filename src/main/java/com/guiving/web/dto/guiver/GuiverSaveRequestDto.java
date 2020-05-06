@@ -1,10 +1,9 @@
 package com.guiving.web.dto.guiver;
 
 import com.guiving.domain.guiver.Guiver;
-import com.guiving.domain.vo.DeviceInfo;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.enums.*;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.enums.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

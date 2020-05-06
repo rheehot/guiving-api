@@ -1,16 +1,11 @@
 package com.guiving.web.dto.user;
 
-import com.guiving.domain.company.Company;
 import com.guiving.domain.user.User;
-import com.guiving.domain.vo.CityInfo;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.Picture;
+import com.guiving.vo.Name;
+import com.guiving.vo.Picture;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

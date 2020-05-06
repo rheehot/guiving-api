@@ -2,13 +2,14 @@ package com.guiving.service;
 
 import com.guiving.domain.operator.Operator;
 import com.guiving.domain.operator.OperatorRepository;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.enums.CityCode;
-import com.guiving.domain.vo.enums.Gender;
-import com.guiving.domain.vo.enums.JoinType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.enums.CityCode;
+import com.guiving.vo.enums.Gender;
+import com.guiving.vo.enums.JoinType;
+import com.guiving.vo.enums.Language;
 import com.guiving.utils.CoreUtils;
+import com.guiving.web.dto.operator.OperatorRegisterRequestDto;
 import com.guiving.web.dto.operator.OperatorSaveRequestDto;
 import com.guiving.web.dto.operator.OperatorUpdateRequestDto;
 import org.junit.After;
@@ -22,8 +23,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -91,5 +90,23 @@ public class OperatorServiceTest {
                 .orElseThrow(() -> new IllegalArgumentException("Operator Not Found"));
 
         System.out.println("updated operator : " + operator);
+    }
+
+    @Test
+    public void register() {
+        OperatorRegisterRequestDto dto = OperatorRegisterRequestDto.builder()
+                .department("department")
+                .position("position")
+                .authCode("a7071b")
+                .joinDate(LocalDate.now())
+                .build();
+
+        Long id = Long.parseLong("55");
+        operatorService.register(id,dto);
+
+        Operator operator = operatorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Operator Not Found"));
+
+        System.out.println("registered operator : " + operator);
     }
 }

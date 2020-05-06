@@ -1,11 +1,9 @@
 package com.guiving.web.dto.company;
 
 import com.guiving.domain.company.Company;
-import com.guiving.domain.vo.CityInfo;
+import com.guiving.vo.CityInfo;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.Date;
 
 @Getter
 @ToString

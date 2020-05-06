@@ -1,18 +1,17 @@
-package com.guiving.domain.vo.enums;
+package com.guiving.vo.enums;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.persistence.Embeddable;
-
 @ToString
-@AllArgsConstructor
 @Getter
-public enum Language implements CodeEnum {
-    ENGLISH("en", "영어"),
-    KOREAN("ko", "한국어");
+@AllArgsConstructor
+public enum JoinType implements CodeEnum {
+    EMAIL("E", "이메일"),
+    GOOGLE("G", "구글"),
+    FACEBOOK("F", "페이스북");
 
     private String code;
     private String comment;
@@ -26,7 +25,6 @@ public enum Language implements CodeEnum {
     public String getComment() {
         return comment;
     }
-
 
     @Override
     public String getCode() {

@@ -1,4 +1,4 @@
-package com.guiving.domain.vo.enums;
+package com.guiving.vo.enums;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;

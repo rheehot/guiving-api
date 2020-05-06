@@ -4,7 +4,7 @@ import com.guiving.domain.city.City;
 import com.guiving.domain.guiver.Guiver;
 import com.guiving.domain.operator.Operator;
 import com.guiving.domain.vehicle.Vehicle;
-import com.guiving.domain.vo.Address;
+import com.guiving.vo.Address;
 import com.guiving.utils.CoreUtils;
 import com.guiving.web.dto.company.CompanyUpdateDto;
 import lombok.Builder;
@@ -111,10 +111,16 @@ public class Company {
     public void addOperator(Operator operator){
         this.operatorList.add(operator);
     }
+    public void addGuiver(Guiver guiver){ this.guiverList.add(guiver);}
+    public void addVehicle(Vehicle vehicle){
+        this.vehicleSet.add(vehicle);
+    }
 
     public void updateInfo(CompanyUpdateDto requestDto){
-        this.name = requestDto.getName();
-        this.ownerName = requestDto.getOwnerName();
+        if(StringUtils.isNotBlank(requestDto.getName()))
+            this.name = requestDto.getName();
+        if(StringUtils.isNotBlank(requestDto.getOwnerName()))
+            this.ownerName = requestDto.getOwnerName();
         if(ObjectUtils.isNotEmpty(requestDto.getBuilDate()))
             this.buildDate = requestDto.getBuilDate();
         if(requestDto.getAddress().isValid())

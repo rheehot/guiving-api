@@ -1,8 +1,6 @@
 package com.guiving.web.dto.user;
 
-import com.guiving.domain.user.Card;
-import com.guiving.domain.vo.Name;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.guiving.vo.Name;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

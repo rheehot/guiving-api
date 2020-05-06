@@ -1,4 +1,4 @@
-package com.guiving.domain.vo.enums;
+package com.guiving.vo.enums;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,11 @@ import lombok.ToString;
 @ToString
 @Getter
 @AllArgsConstructor
-public enum GuiverType implements CodeEnum {
-    EMPLOYED("2", "소속 드라이버"),
-    FREELANCER("3", "프리랜서 드라이버");
+public enum CountryCode implements CodeEnum {
+
+    KR("KR", "한국"),
+    PH("PH", "필리핀"),
+    VN("VN", "베트남");
 
     private String code;
     private String comment;
@@ -25,6 +27,7 @@ public enum GuiverType implements CodeEnum {
     public String getComment() {
         return comment;
     }
+
 
     @Override
     public String getCode() {

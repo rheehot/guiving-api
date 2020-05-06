@@ -1,26 +1,10 @@
 package com.guiving.domain.company;
 
-import com.guiving.domain.city.City;
-import com.guiving.domain.guiver.Guiver;
-import com.guiving.domain.operator.Operator;
-import com.guiving.domain.vehicle.Vehicle;
-import com.guiving.domain.vo.Address;
-import com.guiving.utils.CoreUtils;
-import com.guiving.web.dto.company.CompanyUpdateDto;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 @ToString(exclude = "company")
 @Getter

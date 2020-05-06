@@ -1,4 +1,4 @@
-package com.guiving.domain.vo.enums.status;
+package com.guiving.vo.enums.status;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;
@@ -8,13 +8,14 @@ import lombok.ToString;
 @ToString
 @Getter
 @AllArgsConstructor
-public enum GuiverStatus implements CodeEnum {
-    STANDBY("0", "승인대기"),
-    DENIED("1", "승인거절"),
-    COMPLETED("2", "승인완료"),
-    WITHDRAWN("77", "탈퇴회원"),
-    TERMINATED("88", "만료회원"),
-    JOINED("99", "회원가입");
+public enum ReservationStatus implements CodeEnum {
+    WANTED("1", "매칭대기"),
+    MATCHED("2", "매칭완료"),
+    COMPANY_MATCHED("22", "업체매칭"),
+    VEHICLE_MATCHED("23", "차량매칭"),
+    DRIVER_MATCHED("24", "드라이버매칭"),
+    CANCELED("3", "예약취소"),
+    COMPLETED("4", "운행완료");
 
     private final String code;
     private final String comment;

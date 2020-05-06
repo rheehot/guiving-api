@@ -1,18 +1,17 @@
 package com.guiving.domain.user;
 
-import com.guiving.domain.vo.DeviceInfo;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.Picture;
-import com.guiving.domain.vo.enums.JoinType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.DeviceInfo;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.Picture;
+import com.guiving.vo.enums.JoinType;
+import com.guiving.vo.enums.Language;
 import com.guiving.web.dto.user.UserUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;

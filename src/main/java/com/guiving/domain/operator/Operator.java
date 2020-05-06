@@ -1,23 +1,24 @@
 package com.guiving.domain.operator;
 
 import com.guiving.domain.company.Company;
-import com.guiving.domain.vo.DeviceInfo;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.Picture;
-import com.guiving.domain.vo.enums.*;
-import com.guiving.domain.vo.enums.status.OperatorStatus;
+import com.guiving.vo.DeviceInfo;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.Picture;
+import com.guiving.vo.enums.*;
+import com.guiving.vo.enums.status.OperatorStatus;
+import com.guiving.web.dto.operator.OperatorRegisterRequestDto;
 import com.guiving.web.dto.operator.OperatorUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @ToString
 @NoArgsConstructor
@@ -42,6 +43,12 @@ public class Operator {
 
     @Column(name="op_terms_agree_yn")
     private String termsAgree;
+
+    @Column(name="op_position")
+    private String position;
+
+    @Column(name="op_department")
+    private String department;
 
     @Column(name = "op_join_date")
     private LocalDate joinDate;
@@ -130,5 +137,23 @@ public class Operator {
 
         if(requestDto.getPhoneNumber().isValid())
             this.phoneNumber = requestDto.getPhoneNumber();
+    }
+
+    public void registerInfo(OperatorRegisterRequestDto requestDto){
+        this.status = OperatorStatus.STANDBY;
+
+        if(StringUtils.isNotBlank(requestDto.getDepartment()))
+            this.department = requestDto.getDepartment();
+        if(StringUtils.isNotBlank(requestDto.getPosition()))
+            this.position = requestDto.getPosition();
+        if(ObjectUtils.isNotEmpty(requestDto.getJoinDate()))
+            this.joinDate = requestDto.getJoinDate();
+    }
+
+    public void approval(){
+        if(this.status.equals(OperatorStatus.JOINED))
+            throw new IllegalArgumentException("Operator can not be allowed before registration");
+
+        this.status = OperatorStatus.COMPLETED;
     }
 }

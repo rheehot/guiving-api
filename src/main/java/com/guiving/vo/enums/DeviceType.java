@@ -1,21 +1,22 @@
-package com.guiving.domain.vo.enums;
+package com.guiving.vo.enums;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import org.aspectj.apache.bcel.classfile.Code;
 
 @ToString
 @Getter
 @AllArgsConstructor
-public enum JoinType implements CodeEnum {
-    EMAIL("E", "이메일"),
-    GOOGLE("G", "구글"),
-    FACEBOOK("F", "페이스북");
+public enum DeviceType implements CodeEnum {
+
+    ANDROID("0", "android"),
+    IOS("1", "iOS"),
+    NONE("99", "NONE");
 
     private String code;
     private String comment;
+
 
     @Override
     public String getKey() {
@@ -26,6 +27,7 @@ public enum JoinType implements CodeEnum {
     public String getComment() {
         return comment;
     }
+
 
     @Override
     public String getCode() {

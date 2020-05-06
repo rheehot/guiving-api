@@ -2,11 +2,14 @@ package com.guiving.domain.vehicle;
 
 import com.guiving.domain.company.Company;
 import com.guiving.domain.guiver.Guiver;
+import com.guiving.vo.enums.status.VehicleStatus;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @ToString(exclude = {"company","guiver"})
 @NoArgsConstructor
@@ -28,6 +31,13 @@ public class Vehicle {
     @Column(name = "vehicle_color")
     private String color;
 
+    @Column(name = "vehicle_reged_time")
+    private LocalDateTime regTime;
+
+
+    @Column(name = "vehicle_status")
+    private VehicleStatus status;
+
     @ManyToOne
     @JoinColumn(name = "vehicle_car_model_idx")
     private CarModel carModel;
@@ -39,5 +49,28 @@ public class Vehicle {
     @ManyToOne
     @JoinColumn(name = "vehicle_com_idx")
     private Company company;
+
+    @Builder
+    public Vehicle(String number, String year, String color) {
+        this.number = number;
+        this.year = year;
+        this.color = color;
+        this.status = VehicleStatus.AVAILABLE;
+        this.regTime = LocalDateTime.now();
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+        company.addVehicle(this);
+
+    }
+    public void setGuiver(Guiver guiver) {
+        this.guiver = guiver;
+        guiver.setVehicle(this);
+    }
+
+    public void setCarModel(CarModel carModel){
+        this.carModel = carModel;
+    }
 
 }

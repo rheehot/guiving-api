@@ -1,4 +1,4 @@
-package com.guiving.domain.vo;
+package com.guiving.vo;
 
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;

@@ -1,16 +1,11 @@
 package com.guiving.web.dto.user;
 
-import com.guiving.domain.user.User;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.Picture;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.enums.Language;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @ToString

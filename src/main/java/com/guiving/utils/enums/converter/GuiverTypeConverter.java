@@ -1,7 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.GuiverType;
-import com.guiving.domain.vo.enums.JoinType;
+import com.guiving.vo.enums.GuiverType;
 
 import javax.persistence.Converter;
 

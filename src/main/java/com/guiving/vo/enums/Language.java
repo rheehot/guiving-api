@@ -1,4 +1,4 @@
-package com.guiving.domain.vo.enums;
+package com.guiving.vo.enums;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;
@@ -6,18 +6,14 @@ import lombok.Getter;
 import lombok.ToString;
 
 @ToString
-@Getter
 @AllArgsConstructor
-public enum CarType implements CodeEnum {
-
-    SEDAN("SEDAN", "승용차"),
-    SUV("SUV", "SUV"),
-    VAN("VAN", "벤"),
-    MINIBUS("MINIBUS", "미니버스");
+@Getter
+public enum Language implements CodeEnum {
+    ENGLISH("en", "영어"),
+    KOREAN("ko", "한국어");
 
     private String code;
     private String comment;
-
 
     @Override
     public String getKey() {

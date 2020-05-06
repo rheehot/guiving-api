@@ -1,6 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.Gender;
+import com.guiving.vo.enums.Gender;
 
 import javax.persistence.Converter;
 

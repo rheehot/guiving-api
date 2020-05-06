@@ -1,12 +1,12 @@
 package com.guiving.web.dto.user;
 
 import com.guiving.domain.user.User;
-import com.guiving.domain.vo.DeviceInfo;
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.PhoneNumber;
-import com.guiving.domain.vo.enums.DeviceType;
-import com.guiving.domain.vo.enums.JoinType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.DeviceInfo;
+import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
+import com.guiving.vo.enums.DeviceType;
+import com.guiving.vo.enums.JoinType;
+import com.guiving.vo.enums.Language;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

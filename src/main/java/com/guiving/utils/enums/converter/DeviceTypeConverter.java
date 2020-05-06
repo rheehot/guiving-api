@@ -1,7 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.DeviceType;
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.enums.DeviceType;
 
 import javax.persistence.Converter;
 

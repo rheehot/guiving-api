@@ -1,7 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.status.GuiverCompanyStatus;
-import com.guiving.domain.vo.enums.status.GuiverStatus;
+import com.guiving.vo.enums.status.GuiverCompanyStatus;
 
 import javax.persistence.Converter;
 

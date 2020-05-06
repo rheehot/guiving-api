@@ -1,11 +1,10 @@
-package com.guiving.domain.vo;
+package com.guiving.vo;
 
-import com.guiving.domain.vo.enums.DeviceType;
+import com.guiving.vo.enums.DeviceType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Embeddable;
 

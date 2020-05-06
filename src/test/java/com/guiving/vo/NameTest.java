@@ -1,8 +1,6 @@
-package com.guiving.domain.vo;
+package com.guiving.vo;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class NameTest {
 

@@ -2,8 +2,8 @@ package com.guiving.service;
 
 import com.guiving.domain.company.Company;
 import com.guiving.domain.company.CompanyRepository;
-import com.guiving.domain.vo.Address;
-import com.guiving.domain.vo.enums.CityCode;
+import com.guiving.vo.Address;
+import com.guiving.vo.enums.CityCode;
 import com.guiving.web.dto.company.CompanySaveRequestDto;
 import com.guiving.web.dto.company.CompanyUpdateDto;
 import org.junit.After;
@@ -17,8 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

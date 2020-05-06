@@ -1,6 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.Language;
+import com.guiving.vo.enums.Language;
 
 import javax.persistence.Converter;
 

@@ -1,4 +1,4 @@
-package com.guiving.domain.vo;
+package com.guiving.vo;
 
 import lombok.Builder;
 import lombok.Data;

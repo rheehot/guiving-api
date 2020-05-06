@@ -1,4 +1,4 @@
-package com.guiving.domain.vo;
+package com.guiving.vo;
 
 import lombok.Builder;
 import lombok.Data;
@@ -12,15 +12,15 @@ import javax.persistence.Embeddable;
 @EqualsAndHashCode
 @Data
 @Embeddable
-public class PhoneNumber {
-    private String phoneNumber;
+public class Picture {
+    private String url;
 
     @Builder
-    public PhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public Picture(String url) {
+        this.url = url;
     }
 
     public boolean isValid(){
-        return StringUtils.isNotBlank(phoneNumber);
+        return StringUtils.isNotBlank(url);
     }
 }

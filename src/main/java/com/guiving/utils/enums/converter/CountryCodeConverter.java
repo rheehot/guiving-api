@@ -1,6 +1,6 @@
 package com.guiving.utils.enums.converter;
 
-import com.guiving.domain.vo.enums.CountryCode;
+import com.guiving.vo.enums.CountryCode;
 
 import javax.persistence.Converter;
 

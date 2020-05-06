@@ -1,7 +1,7 @@
 package com.guiving.web.dto.guiver;
 
-import com.guiving.domain.vo.Name;
-import com.guiving.domain.vo.enums.*;
+import com.guiving.vo.Name;
+import com.guiving.vo.enums.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

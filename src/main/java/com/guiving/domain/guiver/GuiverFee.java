@@ -1,6 +1,5 @@
 package com.guiving.domain.guiver;
 
-import com.guiving.domain.vo.enums.CarType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

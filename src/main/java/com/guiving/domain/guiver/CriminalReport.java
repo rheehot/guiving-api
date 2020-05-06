@@ -1,13 +1,13 @@
 package com.guiving.domain.guiver;
 
-import com.guiving.domain.vo.Picture;
+import com.guiving.vo.Picture;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @ToString(exclude = "guiver")
 @NoArgsConstructor
@@ -29,6 +29,13 @@ public class CriminalReport implements Serializable {
     @Embedded
     @AttributeOverride(name = "url",column = @Column(name = "img_file_url"))
     private Picture picture;
+
+    @Builder
+    public CriminalReport(Long id, Guiver guiver, Picture picture) {
+        this.id = id;
+        this.guiver = guiver;
+        this.picture = picture;
+    }
 
     public void setGuiver(Guiver guiver){
         this.guiver = guiver;

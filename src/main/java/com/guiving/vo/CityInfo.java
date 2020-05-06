@@ -1,8 +1,8 @@
-package com.guiving.domain.vo;
+package com.guiving.vo;
 
 import com.guiving.domain.city.City;
-import com.guiving.domain.vo.enums.CityCode;
-import com.guiving.domain.vo.enums.Currency;
+import com.guiving.vo.enums.CityCode;
+import com.guiving.vo.enums.Currency;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,6 +1,7 @@
 package com.guiving.domain.guiver;
 
-import com.guiving.domain.vo.Picture;
+import com.guiving.vo.Picture;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -35,6 +36,15 @@ public class DriverLicense implements Serializable {
     @Embedded
     @AttributeOverride(name = "url",column = @Column(name = "dl_img_url"))
     Picture picture;
+
+    @Builder
+    public DriverLicense(Long id, Guiver guiver, String licenseNum, LocalDate expiredDate, Picture picture) {
+        this.id = id;
+        this.guiver = guiver;
+        this.licenseNum = licenseNum;
+        this.expiredDate = expiredDate;
+        this.picture = picture;
+    }
 
     public void setGuiver(Guiver guiver){
         this.guiver = guiver;

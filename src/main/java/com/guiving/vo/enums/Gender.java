@@ -1,18 +1,18 @@
-package com.guiving.domain.vo.enums;
+package com.guiving.vo.enums;
 
 import com.guiving.interfaces.CodeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+
 @ToString
 @Getter
 @AllArgsConstructor
-public enum CountryCode implements CodeEnum {
-
-    KR("KR", "한국"),
-    PH("PH", "필리핀"),
-    VN("VN", "베트남");
+public enum Gender implements CodeEnum {
+    MALE("m", "남성"),
+    FEMALE("f", "여성"),
+    NONE("n", "알리지 않음");
 
     private String code;
     private String comment;

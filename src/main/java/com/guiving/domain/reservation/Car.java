@@ -1,7 +1,7 @@
 package com.guiving.domain.reservation;
 
 import com.guiving.domain.city.City;
-import com.guiving.domain.vo.enums.CarType;
+import com.guiving.vo.enums.CarType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

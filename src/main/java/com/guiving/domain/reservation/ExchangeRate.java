@@ -1,7 +1,6 @@
 package com.guiving.domain.reservation;
 
-import com.guiving.domain.vo.enums.CarType;
-import com.guiving.domain.vo.enums.Currency;
+import com.guiving.vo.enums.Currency;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -9,8 +8,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @ToString
 @NoArgsConstructor
