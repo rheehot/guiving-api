@@ -1,5 +1,6 @@
-package com.guiving.domain.vehicle;
+package com.guiving.domain.car;
 
+import com.guiving.domain.car.CarRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CarModelRepositoryTest {
+public class CarRepositoryTest {
     @Autowired
-    CarModelRepository carModelRepository;
-
+    CarRepository carRepository;
     @Test
-    public void findAll(){
-        carModelRepository.findAll()
+    public void findAll() {
+        carRepository.findAll()
                 .forEach(x-> System.out.println("element : " + x));
     }
 }

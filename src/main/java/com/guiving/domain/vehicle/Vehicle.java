@@ -1,12 +1,16 @@
 package com.guiving.domain.vehicle;
 
+import com.guiving.domain.carmodel.CarModel;
 import com.guiving.domain.company.Company;
 import com.guiving.domain.guiver.Guiver;
 import com.guiving.vo.enums.status.VehicleStatus;
+import com.guiving.web.dto.vehicle.VehicleUpdateReqeustDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -62,15 +66,32 @@ public class Vehicle {
     public void setCompany(Company company) {
         this.company = company;
         company.addVehicle(this);
-
     }
+
+    public void unsetGuiver(){
+        this.guiver =null;
+    }
+
     public void setGuiver(Guiver guiver) {
+        if(ObjectUtils.isNotEmpty(guiver.getVehicle())){
+            guiver.getVehicle().unsetGuiver();
+        }
         this.guiver = guiver;
         guiver.setVehicle(this);
     }
 
     public void setCarModel(CarModel carModel){
         this.carModel = carModel;
+    }
+
+    public void updateInfo(VehicleUpdateReqeustDto reqeustDto){
+        if(StringUtils.isNotBlank(reqeustDto.getColor()))
+            this.color = reqeustDto.getColor();
+        if(StringUtils.isNotBlank(reqeustDto.getYear()))
+            this.year = reqeustDto.getYear();
+        if(StringUtils.isNotBlank(reqeustDto.getNumber()))
+            this.number = reqeustDto.getNumber();
+
     }
 
 }

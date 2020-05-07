@@ -1,4 +1,4 @@
-package com.guiving.domain.vehicle;
+package com.guiving.domain.carmodel;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.guiving.domain.reservation;
+package com.guiving.domain.carmodel;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,12 +8,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CarRepositoryTest {
+public class CarModelRepositoryTest {
     @Autowired
-    CarRepository carRepository;
+    CarModelRepository carModelRepository;
+
     @Test
-    public void findAll() {
-        carRepository.findAll()
+    public void findAll(){
+        carModelRepository.findAll()
                 .forEach(x-> System.out.println("element : " + x));
     }
 }

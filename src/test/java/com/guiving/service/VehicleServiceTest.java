@@ -4,6 +4,7 @@ import com.guiving.domain.vehicle.Vehicle;
 import com.guiving.domain.vehicle.VehicleRepository;
 import com.guiving.vo.enums.Provider;
 import com.guiving.web.dto.vehicle.VehicleSaveReqeustDto;
+import com.guiving.web.dto.vehicle.VehicleUpdateReqeustDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,8 +55,6 @@ public class VehicleServiceTest {
         list.add(vehicle);
 
 
-
-
     }
 
     @Test
@@ -80,5 +79,19 @@ public class VehicleServiceTest {
 
     @Test
     public void update() {
+        VehicleUpdateReqeustDto dto = VehicleUpdateReqeustDto.builder()
+                .color("yellow")
+                .year("1994")
+                .number("56230320")
+                .build();
+        Long id = Long.parseLong("106");
+
+        vehicleService.update(id,dto);
+
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("vehicle does not exist"));
+
+        System.out.println("updated vehicle : " + vehicle);
     }
+
 }

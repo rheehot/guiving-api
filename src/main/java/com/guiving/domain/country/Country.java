@@ -1,5 +1,6 @@
-package com.guiving.domain.city;
+package com.guiving.domain.country;
 
+import com.guiving.domain.city.City;
 import com.guiving.vo.enums.CountryCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

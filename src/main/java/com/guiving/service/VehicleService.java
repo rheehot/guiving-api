@@ -4,12 +4,13 @@ import com.guiving.domain.company.Company;
 import com.guiving.domain.company.CompanyRepository;
 import com.guiving.domain.guiver.Guiver;
 import com.guiving.domain.guiver.GuiverRepository;
-import com.guiving.domain.vehicle.CarModel;
-import com.guiving.domain.vehicle.CarModelRepository;
+import com.guiving.domain.carmodel.CarModel;
+import com.guiving.domain.carmodel.CarModelRepository;
 import com.guiving.domain.vehicle.Vehicle;
 import com.guiving.domain.vehicle.VehicleRepository;
 import com.guiving.vo.enums.Provider;
 import com.guiving.web.dto.vehicle.VehicleSaveReqeustDto;
+import com.guiving.web.dto.vehicle.VehicleUpdateReqeustDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +53,16 @@ public class VehicleService {
     }
 
     @Transactional
-    public void update() {
+    public void update(Long id, VehicleUpdateReqeustDto request) {
+        Vehicle vehicle = findVehicleById(id);
+
+        vehicle.updateInfo(request);
+
     }
 
+    private Vehicle findVehicleById(Long id){
+        return vehicleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("vehicle does not exist id : "+ id));
+    }
 
 }

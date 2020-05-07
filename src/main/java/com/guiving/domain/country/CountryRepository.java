@@ -1,6 +1,5 @@
-package com.guiving.domain.city;
+package com.guiving.domain.country;
 
-import com.guiving.domain.city.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.guiving.domain.reservation;
+package com.guiving.domain.car;
 
 import com.guiving.domain.city.City;
 import com.guiving.vo.enums.CarType;

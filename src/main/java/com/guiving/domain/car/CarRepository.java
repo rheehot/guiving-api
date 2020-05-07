@@ -1,4 +1,4 @@
-package com.guiving.domain.reservation;
+package com.guiving.domain.car;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

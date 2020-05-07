@@ -16,11 +16,11 @@ public class CompanyController {
     public ResponseEntity<?> findAll() {
         ResponseEntity<?> result;
         try {
-            result = new ResponseEntity<>(companyService.findAll(), HttpStatus.OK) ;
+            result = new ResponseEntity<>(companyService.findAll(), HttpStatus.OK);
         }
         catch(Exception e) {
             e.printStackTrace();
-            result = new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT) ;
+            result = new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT);
         }
         return result;
     }

@@ -1,4 +1,4 @@
-package com.guiving.domain.reservation;
+package com.guiving.domain.exchangerate;
 
 import com.guiving.vo.enums.Currency;
 import lombok.Getter;
@@ -37,4 +37,8 @@ public class ExchangeRate implements Serializable {
     @Column(name="exc_date")
     private Date date;
 
+
+    public int cal(int price){
+        return (int)(this.rate * price);
+    }
 }
