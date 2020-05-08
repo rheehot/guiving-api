@@ -3,6 +3,7 @@ package com.guiving.domain.reservation;
 import com.guiving.domain.car.Car;
 import com.guiving.domain.city.City;
 import com.guiving.domain.company.Company;
+import com.guiving.domain.cost.Cost;
 import com.guiving.domain.exchangerate.ExchangeRate;
 import com.guiving.domain.guiver.Guiver;
 import com.guiving.domain.operator.Operator;
@@ -40,6 +41,10 @@ public class Guiving implements Serializable {
 
     @Column(name="res_date")
     private LocalDate serviceDate;
+
+    @ManyToOne
+    @JoinColumn(name = "guiving_cost_idx")
+    private Cost cost;
 
     @OneToMany
     @JoinColumn(name = "guiving_idx")
