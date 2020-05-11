@@ -37,6 +37,7 @@ public class GuiverResponseDto {
         this.language = guiver.getLanguage();
         this.deviceInfo = guiver.getDeviceInfo();
         this.cityInfo = new CityInfo(guiver.getCity());
-        this.companyInfo = new CompanyResponseDto(guiver.getCompany());
+        if(guiver.getType().equals(GuiverType.EMPLOYED))
+            this.companyInfo = new CompanyResponseDto(guiver.getCompany());
     }
 }

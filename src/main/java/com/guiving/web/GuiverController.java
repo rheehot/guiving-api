@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,21 @@ public class GuiverController {
 
     private final GuiverService guiverService;
 
-    @PostMapping("/api/v1/guiver")
+    @GetMapping("/api/v1/guivers")
+    public ResponseEntity<?> findBySearch(GuiverSaveRequestDto request) throws Exception {
+        ResponseEntity<?> result;
+        try {
+            Long id = guiverService.save(request);
+            result = new ResponseEntity<>(guiverService.findById(id),HttpStatus.OK) ;
+        }
+        catch(Exception e) {
+            logger.debug(e.getMessage());
+            result = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST) ;
+        }
+        return result;
+    }
+
+    @PostMapping("/api/v1/guivers")
     public ResponseEntity<?> save(GuiverSaveRequestDto request) throws Exception {
         ResponseEntity<?> result;
         try {
@@ -25,10 +40,11 @@ public class GuiverController {
             result = new ResponseEntity<>(guiverService.findById(id),HttpStatus.OK) ;
         }
         catch(Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             result = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST) ;
         }
         return result;
     }
+
 
 }

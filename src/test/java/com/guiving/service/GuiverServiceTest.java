@@ -6,6 +6,7 @@ import com.guiving.vo.Address;
 import com.guiving.vo.Name;
 import com.guiving.vo.Picture;
 import com.guiving.vo.enums.*;
+import com.guiving.web.dto.PageRequest;
 import com.guiving.web.dto.guiver.*;
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
@@ -112,5 +116,18 @@ public class GuiverServiceTest {
 
         System.out.println("registered guiver : " + guiver);
 
+    }
+
+    @Test
+    public void searchAll() {
+        PageRequest pageRequest = new PageRequest();
+        pageRequest.setDirection(Sort.Direction.ASC);
+        pageRequest.setSize(10);
+        pageRequest.setPage(0);
+        Page<GuiverResponseDto> result = guiverService.searchAll(pageRequest.of());
+
+        result.forEach(
+                x -> System.out.println("element : " + x)
+        );
     }
 }

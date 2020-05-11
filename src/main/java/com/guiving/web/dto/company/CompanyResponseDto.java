@@ -4,6 +4,7 @@ import com.guiving.domain.company.Company;
 import com.guiving.vo.CityInfo;
 import lombok.Getter;
 import lombok.ToString;
+import org.apache.commons.lang3.ObjectUtils;
 
 @Getter
 @ToString
