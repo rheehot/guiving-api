@@ -2,15 +2,14 @@ package com.guiving.domain.guiver;
 
 import com.guiving.vo.Name;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import javafx.beans.binding.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 @RequiredArgsConstructor
 public class GuiverRepositoryImpl implements GuiverRepositoryCustom {
@@ -33,9 +32,10 @@ public class GuiverRepositoryImpl implements GuiverRepositoryCustom {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
-        return new PageImpl<Guiver>(result.getResults(),pageable,result.getTotal());
+        return new PageImpl<>(result.getResults(),pageable,result.getTotal());
 
     }
+
 
 
 
