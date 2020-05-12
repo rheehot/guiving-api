@@ -8,10 +8,12 @@ import lombok.ToString;
 @ToString
 @Getter
 @AllArgsConstructor
-public enum Provider implements CodeEnum {
+public enum CarGrade implements CodeEnum {
 
-    BUSINESS("BUSINESS", "업체 공급자"),
-    PERSONAL("PERSONAL", "개인 공급자");
+    SEDAN("1", "승용차"),
+    SUV("2", "SUV"),
+    VAN("3", "벤"),
+    MINIBUS("4", "미니버스");
 
     private String code;
     private String comment;

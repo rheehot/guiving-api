@@ -1,7 +1,7 @@
 package com.guiving.domain.car;
 
 import com.guiving.domain.city.City;
-import com.guiving.vo.enums.CarType;
+import com.guiving.vo.enums.CarGrade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -24,9 +24,8 @@ public class Car {
     @JoinColumn(name = "city_idx")
     private City city;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="car_title")
-    private CarType type;
+    @Column(name="car_model_grade")
+    private CarGrade grade;
 
     @Column(name="car_desc")
     private String desc;

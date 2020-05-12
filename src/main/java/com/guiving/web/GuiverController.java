@@ -1,7 +1,9 @@
 package com.guiving.web;
 
 import com.guiving.service.GuiverService;
+import com.guiving.web.dto.PageRequest;
 import com.guiving.web.dto.guiver.GuiverSaveRequestDto;
+import com.guiving.web.dto.guiver.GuiverSearchDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +20,11 @@ public class GuiverController {
 
     private final GuiverService guiverService;
 
-    @GetMapping("/api/v1/guivers")
-    public ResponseEntity<?> findBySearch(GuiverSaveRequestDto request) throws Exception {
+    @GetMapping("/api/v1/guivers/search")
+    public ResponseEntity<?> searchAll(GuiverSearchDto search, PageRequest pageRequest) throws Exception {
         ResponseEntity<?> result;
         try {
-            Long id = guiverService.save(request);
-            result = new ResponseEntity<>(guiverService.findById(id),HttpStatus.OK) ;
+            result = new ResponseEntity<>(guiverService.searchAll(search,pageRequest.of()),HttpStatus.OK) ;
         }
         catch(Exception e) {
             logger.debug(e.getMessage());

@@ -2,14 +2,24 @@ package com.guiving.service;
 
 import com.guiving.domain.vehicle.Vehicle;
 import com.guiving.domain.vehicle.VehicleRepository;
+import com.guiving.vo.enums.CarGrade;
+import com.guiving.vo.enums.OwnType;
 import com.guiving.vo.enums.Provider;
+import com.guiving.vo.enums.status.VehicleStatus;
+import com.guiving.web.dto.PageRequest;
+import com.guiving.web.dto.operator.OperatorResponseDto;
+import com.guiving.web.dto.operator.OperatorSearchDto;
+import com.guiving.web.dto.vehicle.VehicleResponseDto;
 import com.guiving.web.dto.vehicle.VehicleSaveReqeustDto;
+import com.guiving.web.dto.vehicle.VehicleSearchDto;
 import com.guiving.web.dto.vehicle.VehicleUpdateReqeustDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -41,7 +51,7 @@ public class VehicleServiceTest {
                 .number("230jfj")
                 .year("3919")
                 .modelId(Long.parseLong("3"))
-                .ownerType(Provider.GUIVER)
+                .ownType(OwnType.PERSONAL)
                 .ownerId(Long.parseLong("127"))
                 .build();
 
@@ -64,7 +74,7 @@ public class VehicleServiceTest {
                 .number("230jfj")
                 .year("3919")
                 .modelId(Long.parseLong("3"))
-                .ownerType(Provider.COMPANY)
+                .ownType(OwnType.BUSINESS)
                 .ownerId(Long.parseLong("71"))
                 .build();
 
@@ -94,4 +104,23 @@ public class VehicleServiceTest {
         System.out.println("updated vehicle : " + vehicle);
     }
 
+    @Test
+    public void searchAll() {
+        VehicleSearchDto dto = VehicleSearchDto
+                .builder()
+                .grade(CarGrade.SEDAN)
+                .ownType(OwnType.BUSINESS)
+                .status(VehicleStatus.AVAILABLE)
+                .build();
+
+        PageRequest pageRequest = new PageRequest();
+        pageRequest.setDirection(Sort.Direction.ASC);
+        pageRequest.setSize(10);
+        pageRequest.setPage(0);
+        Page<VehicleResponseDto> result = vehicleService.searchAll(dto,pageRequest.of());
+
+        result.forEach(
+                x -> System.out.println("element : " + x)
+        );
+    }
 }

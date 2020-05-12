@@ -11,11 +11,10 @@ import com.guiving.domain.operator.OperatorRepository;
 import com.guiving.web.dto.guiver.GuiverResponseDto;
 import com.guiving.web.dto.guiver.GuiverSaveRequestDto;
 import com.guiving.web.dto.guiver.GuiverUpdateRequestDto;
-import com.guiving.web.dto.operator.OperatorRegisterRequestDto;
-import com.guiving.web.dto.operator.OperatorResponseDto;
-import com.guiving.web.dto.operator.OperatorSaveRequestDto;
-import com.guiving.web.dto.operator.OperatorUpdateRequestDto;
+import com.guiving.web.dto.operator.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class OperatorService {
     private final OperatorRepository operatorRepository;
     private final CompanyRepository companyRepository;
+
+    @Transactional(readOnly = true)
+    public Page<OperatorResponseDto> searchAll(OperatorSearchDto search, Pageable pageable){
+        return operatorRepository.searchAll(search,pageable)
+                .map(OperatorResponseDto::new);
+    }
 
     @Transactional
     public Long save(OperatorSaveRequestDto request) {

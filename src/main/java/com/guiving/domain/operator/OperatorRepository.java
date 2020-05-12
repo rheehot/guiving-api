@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface OperatorRepository extends JpaRepository<Operator,Long> {
+public interface OperatorRepository extends JpaRepository<Operator,Long>, OperatorRepositoryCustom {
 
     @EntityGraph(attributePaths ={"company","company.city"} )
     @Query("select DISTINCT o from Operator o")

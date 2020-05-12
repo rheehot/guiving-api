@@ -9,15 +9,20 @@ import com.guiving.vo.enums.Gender;
 import com.guiving.vo.enums.JoinType;
 import com.guiving.vo.enums.Language;
 import com.guiving.utils.CoreUtils;
-import com.guiving.web.dto.operator.OperatorRegisterRequestDto;
-import com.guiving.web.dto.operator.OperatorSaveRequestDto;
-import com.guiving.web.dto.operator.OperatorUpdateRequestDto;
+import com.guiving.vo.enums.status.GuiverStatus;
+import com.guiving.vo.enums.status.OperatorStatus;
+import com.guiving.web.dto.PageRequest;
+import com.guiving.web.dto.guiver.GuiverResponseDto;
+import com.guiving.web.dto.guiver.GuiverSearchDto;
+import com.guiving.web.dto.operator.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
@@ -108,5 +113,24 @@ public class OperatorServiceTest {
                 .orElseThrow(() -> new IllegalArgumentException("Operator Not Found"));
 
         System.out.println("registered operator : " + operator);
+    }
+
+    @Test
+    public void searchAll() {
+        OperatorSearchDto dto = OperatorSearchDto
+                .builder()
+                //.status(OperatorStatus.STANDBY)
+                .companyId(Long.parseLong("71"))
+                .build();
+
+        PageRequest pageRequest = new PageRequest();
+        pageRequest.setDirection(Sort.Direction.ASC);
+        pageRequest.setSize(10);
+        pageRequest.setPage(0);
+        Page<OperatorResponseDto> result = operatorService.searchAll(dto,pageRequest.of());
+
+        result.forEach(
+                x -> System.out.println("element : " + x)
+        );
     }
 }

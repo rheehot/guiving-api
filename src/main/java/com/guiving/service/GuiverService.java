@@ -5,18 +5,13 @@ import com.guiving.domain.city.CityRepository;
 import com.guiving.domain.company.Company;
 import com.guiving.domain.company.CompanyRepository;
 import com.guiving.domain.guiver.*;
-import com.guiving.web.dto.company.CompanyResponseDto;
-import com.guiving.web.dto.guiver.GuiverRegisterRequestDto;
-import com.guiving.web.dto.guiver.GuiverResponseDto;
-import com.guiving.web.dto.guiver.GuiverSaveRequestDto;
-import com.guiving.web.dto.guiver.GuiverUpdateRequestDto;
+import com.guiving.web.dto.guiver.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -26,8 +21,8 @@ public class GuiverService {
     private final CompanyRepository companyRepository;
 
     @Transactional(readOnly = true)
-    public Page<GuiverResponseDto> searchAll(Pageable pageable){
-        return guiverRepository.searchAll(pageable)
+    public Page<GuiverResponseDto> searchAll(GuiverSearchDto search,Pageable pageable){
+        return guiverRepository.searchAll(search,pageable)
                 .map(GuiverResponseDto::new);
     }
 
@@ -38,7 +33,6 @@ public class GuiverService {
         Guiver guiver = request.toEntity();
         City city = cityRepository.findByCode(request.getCityCode());
         guiver.setCity(city);
-
 
         return guiverRepository.save(guiver).getId();
     }
@@ -71,7 +65,6 @@ public class GuiverService {
 
         Company company = companyRepository.findByAuthCode(request.getAuthCode());
         guiver.setCompany(company);
-
     }
 
     @Transactional

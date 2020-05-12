@@ -8,15 +8,13 @@ import lombok.ToString;
 @ToString
 @Getter
 @AllArgsConstructor
-public enum CarType implements CodeEnum {
+public enum OwnType implements CodeEnum {
 
-    SEDAN("SEDAN", "승용차"),
-    SUV("SUV", "SUV"),
-    VAN("VAN", "벤"),
-    MINIBUS("MINIBUS", "미니버스");
+    PERSONAL("PERSONAL","개인소유"),
+    BUSINESS("BUSINESS", "업체소유");
 
-    private String code;
-    private String comment;
+    private final String code;
+    private final String comment;
 
 
     @Override
@@ -28,7 +26,6 @@ public enum CarType implements CodeEnum {
     public String getComment() {
         return comment;
     }
-
 
     @Override
     public String getCode() {

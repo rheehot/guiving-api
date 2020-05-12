@@ -4,7 +4,10 @@ import com.guiving.domain.company.Company;
 import com.guiving.domain.company.CompanyRepository;
 import com.guiving.vo.Address;
 import com.guiving.vo.enums.CityCode;
+import com.guiving.web.dto.PageRequest;
+import com.guiving.web.dto.company.CompanyListResponseDto;
 import com.guiving.web.dto.company.CompanySaveRequestDto;
+import com.guiving.web.dto.company.CompanySearchDto;
 import com.guiving.web.dto.company.CompanyUpdateDto;
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
@@ -80,5 +85,19 @@ public class CompanyServiceTest {
                 ()-> new IllegalArgumentException("Company Not Found"));
 
         System.out.println("updated company : " + company);
+    }
+
+    @Test
+    public void searchAll() {
+        CompanySearchDto dto = CompanySearchDto.builder()
+                .cityCode(CityCode.MNL)
+                .build();
+        PageRequest pageRequest = new PageRequest();
+        pageRequest.setDirection(Sort.Direction.ASC);
+        pageRequest.setSize(10);
+        pageRequest.setPage(0);
+        Page<CompanyListResponseDto> result = companyService.searchAll(dto,pageRequest.of());
+
+        result.forEach(x-> System.out.println("element :" +x));
     }
 }

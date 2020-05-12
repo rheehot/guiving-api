@@ -1,5 +1,6 @@
 package com.guiving.domain.carmodel;
 
+import com.guiving.vo.enums.CarGrade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -27,6 +28,6 @@ public class CarModel {
     private String seats;
 
     @Column(name = "cm_grade")
-    private Long grade;
+    private CarGrade grade;
 
 }

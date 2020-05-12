@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
+public interface VehicleRepository extends JpaRepository<Vehicle,Long>, VehicleRepositoryCustom {
 
     @EntityGraph(attributePaths = {"company","company.city", "guiver","guiver.city"} )
     @Query("select DISTINCT v from Vehicle v join fetch v.carModel")

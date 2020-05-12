@@ -3,6 +3,7 @@ package com.guiving.domain.vehicle;
 import com.guiving.domain.carmodel.CarModel;
 import com.guiving.domain.company.Company;
 import com.guiving.domain.guiver.Guiver;
+import com.guiving.vo.enums.OwnType;
 import com.guiving.vo.enums.status.VehicleStatus;
 import com.guiving.web.dto.vehicle.VehicleUpdateReqeustDto;
 import lombok.Builder;
@@ -38,7 +39,6 @@ public class Vehicle {
     @Column(name = "vehicle_reged_time")
     private LocalDateTime regTime;
 
-
     @Column(name = "vehicle_status")
     private VehicleStatus status;
 
@@ -54,6 +54,9 @@ public class Vehicle {
     @JoinColumn(name = "vehicle_com_idx")
     private Company company;
 
+    @Transient
+    private OwnType ownType;
+
     @Builder
     public Vehicle(String number, String year, String color) {
         this.number = number;
@@ -63,9 +66,18 @@ public class Vehicle {
         this.regTime = LocalDateTime.now();
     }
 
+    @PostLoad
+    public void setOwnType(){
+        if(ObjectUtils.isNotEmpty(this.company))
+            this.ownType = OwnType.BUSINESS;
+        if(ObjectUtils.isNotEmpty(this.guiver))
+            this.ownType = OwnType.PERSONAL;
+    }
+
     public void setCompany(Company company) {
         this.company = company;
         company.addVehicle(this);
+        this.ownType = OwnType.BUSINESS;
     }
 
     public void unsetGuiver(){
@@ -78,6 +90,7 @@ public class Vehicle {
         }
         this.guiver = guiver;
         guiver.setVehicle(this);
+        this.ownType = OwnType.PERSONAL;
     }
 
     public void setCarModel(CarModel carModel){

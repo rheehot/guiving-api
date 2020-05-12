@@ -6,20 +6,18 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class GuiverRepositoryTest {
     @Autowired
-    GuiverRepository gp;
+    GuiverRepository guiverRepository;
 
     @Test
     public void findAllTest(){
-        gp.findAll()
+        guiverRepository.findAll()
                 .forEach(x ->
                         System.out.println("element : " + x)
                 );
@@ -30,11 +28,11 @@ public class GuiverRepositoryTest {
                 .firstName("Lee")
                 .lastName("Harrison")
                 .build();
-        List<Guiver> list= gp.findByName(name);
+        List<Guiver> list= guiverRepository.findByName(name);
 
         list.forEach(x-> System.out.println("element : " +x));
 
-
     }
+
 
 }

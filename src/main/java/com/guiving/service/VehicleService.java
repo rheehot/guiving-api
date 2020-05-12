@@ -8,10 +8,15 @@ import com.guiving.domain.carmodel.CarModel;
 import com.guiving.domain.carmodel.CarModelRepository;
 import com.guiving.domain.vehicle.Vehicle;
 import com.guiving.domain.vehicle.VehicleRepository;
+import com.guiving.vo.enums.OwnType;
 import com.guiving.vo.enums.Provider;
+import com.guiving.web.dto.vehicle.VehicleResponseDto;
 import com.guiving.web.dto.vehicle.VehicleSaveReqeustDto;
+import com.guiving.web.dto.vehicle.VehicleSearchDto;
 import com.guiving.web.dto.vehicle.VehicleUpdateReqeustDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +29,13 @@ public class VehicleService {
     private final GuiverRepository guiverRepository;
 
     @Transactional
+    public Page<VehicleResponseDto> searchAll(VehicleSearchDto search, Pageable pageable){
+        return vehicleRepository.searchAll(search,pageable)
+                .map(VehicleResponseDto::new);
+
+    }
+
+    @Transactional
     public Long save(VehicleSaveReqeustDto request) {
 
         Vehicle vehicle= request.toEntity();
@@ -33,14 +45,14 @@ public class VehicleService {
         vehicle.setCarModel(carModel);
 
 
-        if(request.getOwnerType().equals(Provider.COMPANY)){
+        if(request.getOwnType().equals(OwnType.BUSINESS)){
             Company company = companyRepository.findById(request.getOwnerId())
                     .orElseThrow(()-> new IllegalArgumentException("company does not exsit id : "+ request.getOwnerId()));
 
             vehicle.setCompany(company);
         }
 
-        if(request.getOwnerType().equals(Provider.GUIVER)){
+        if(request.getOwnType().equals(OwnType.PERSONAL)){
             Guiver guiver = guiverRepository.findById(request.getOwnerId())
                     .orElseThrow(()-> new IllegalArgumentException("guiver does not exsit id : "+ request.getOwnerId()));
 

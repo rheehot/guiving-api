@@ -5,10 +5,14 @@ import com.guiving.domain.city.CityRepository;
 import com.guiving.domain.company.Company;
 import com.guiving.domain.company.CompanyFee;
 import com.guiving.domain.company.CompanyRepository;
+import com.guiving.web.dto.PageRequest;
 import com.guiving.web.dto.company.CompanyListResponseDto;
 import com.guiving.web.dto.company.CompanySaveRequestDto;
+import com.guiving.web.dto.company.CompanySearchDto;
 import com.guiving.web.dto.company.CompanyUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,12 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final CityRepository cityRepository;
 
+
+    @Transactional(readOnly = true)
+    public Page<CompanyListResponseDto> searchAll(CompanySearchDto search, Pageable pageable){
+        return companyRepository.searchAll(search,pageable)
+                .map(CompanyListResponseDto::new);
+    }
 
     @Transactional(readOnly = true)
     public List<CompanyListResponseDto> findAll() throws Exception{

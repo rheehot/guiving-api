@@ -2,6 +2,7 @@ package com.guiving.web.dto.vehicle;
 
 import com.guiving.domain.vehicle.Vehicle;
 import com.guiving.vo.Picture;
+import com.guiving.vo.enums.OwnType;
 import com.guiving.vo.enums.Provider;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class VehicleSaveReqeustDto {
     private Long ownerId;
-    private Provider ownerType;
+    private OwnType ownType;
     private String number;
     private Long modelId;
     private String color;
@@ -19,9 +20,9 @@ public class VehicleSaveReqeustDto {
     private Picture[] pictures;
 
     @Builder
-    public VehicleSaveReqeustDto(Long ownerId, Provider ownerType, String number, Long modelId, String color, String year, Picture[] pictures) {
+    public VehicleSaveReqeustDto(Long ownerId, OwnType ownType, String number, Long modelId, String color, String year, Picture[] pictures) {
         this.ownerId = ownerId;
-        this.ownerType = ownerType;
+        this.ownType = ownType;
         this.number = number;
         this.modelId = modelId;
         this.color = color;
