@@ -5,7 +5,6 @@ import com.guiving.vo.enums.GuiverType;
 import com.guiving.vo.enums.status.GuiverStatus;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 

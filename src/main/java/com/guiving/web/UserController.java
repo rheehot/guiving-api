@@ -1,6 +1,5 @@
 package com.guiving.web;
 
-import com.guiving.service.CompanyService;
 import com.guiving.service.UserService;
 import com.guiving.web.dto.user.UserSaveRequestDto;
 import com.guiving.web.dto.user.UserUpdateRequestDto;
@@ -32,7 +31,7 @@ public class UserController {
     }
 
     @PutMapping("/api/v1/user")
-    public ResponseEntity<?> updae(Long id, UserUpdateRequestDto request) throws Exception {
+    public ResponseEntity<?> update(Long id, UserUpdateRequestDto request) throws Exception {
         ResponseEntity<?> result;
         try {
             userService.update(id,request);

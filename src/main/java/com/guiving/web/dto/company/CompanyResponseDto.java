@@ -16,6 +16,8 @@ public class CompanyResponseDto {
     private CityInfo cityInfo;
 
     public CompanyResponseDto(Company company) {
+        if(ObjectUtils.isEmpty(company))
+            return;
         this.id = company.getId();
         this.name = company.getName();
         this.authCode = company.getAuthCode();

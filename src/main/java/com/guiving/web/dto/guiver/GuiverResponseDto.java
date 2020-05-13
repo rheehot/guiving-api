@@ -8,6 +8,7 @@ import com.guiving.vo.enums.*;
 import com.guiving.web.dto.company.CompanyResponseDto;
 import lombok.Getter;
 import lombok.ToString;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.time.LocalDate;
 
@@ -27,6 +28,8 @@ public class GuiverResponseDto {
     private CompanyResponseDto companyInfo;
 
     public GuiverResponseDto(Guiver guiver) {
+        if(ObjectUtils.isEmpty(guiver))
+            return;
         this.id = guiver.getId();
         this.name = guiver.getName();
         this.email = guiver.getEmail();

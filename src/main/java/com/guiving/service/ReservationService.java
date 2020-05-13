@@ -1,14 +1,12 @@
 package com.guiving.service;
 
-import com.guiving.domain.city.City;
-import com.guiving.domain.city.CityRepository;
-import com.guiving.domain.company.Company;
-import com.guiving.domain.company.CompanyFee;
-import com.guiving.domain.company.CompanyRepository;
-import com.guiving.web.dto.company.CompanyListResponseDto;
-import com.guiving.web.dto.company.CompanySaveRequestDto;
-import com.guiving.web.dto.company.CompanyUpdateDto;
+import com.guiving.domain.reservation.Reservation;
+import com.guiving.domain.reservation.ReservationRepository;
+import com.guiving.web.dto.reservation.ReservationResponseDto;
+import com.guiving.web.dto.reservation.ReservationSearchDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,21 +17,16 @@ import java.util.stream.Collectors;
 @Service
 public class ReservationService {
 
-    private final CompanyRepository companyRepository;
+    private final ReservationRepository reservationRepository;
 
-    private final CityRepository cityRepository;
-
-
-    @Transactional
-    public Long save(CompanySaveRequestDto request) throws Exception{
-
-
-        return 1L;
+    @Transactional(readOnly = true)
+    public Page<ReservationResponseDto> searchAll(ReservationSearchDto search, Pageable pageable){
+        return reservationRepository.searchAll(search,pageable)
+                .map(ReservationResponseDto::new);
     }
 
-
-    private Company findCompanyById(Long id){
-        return companyRepository.findById(id)
+    private Reservation findReservationById(Long id){
+        return reservationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Company does not exist. id : " + id));
     }
 }

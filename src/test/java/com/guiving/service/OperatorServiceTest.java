@@ -61,7 +61,7 @@ public class OperatorServiceTest {
                 .joinType(JoinType.EMAIL)
                 .language(Language.KOREAN)
                 .phoneNumber(PhoneNumber.builder().phoneNumber("123123123").build())
-                .email(CoreUtils.getRandomStr()+"@email.com")
+                .email("testOp@email.com")
                 .name(Name.builder().firstName("Sdfsdf").lastName("operatror").build())
                 .password("password")
                 .uid("uiduid1231213")
@@ -73,6 +73,7 @@ public class OperatorServiceTest {
                 .orElseThrow(()->new IllegalArgumentException("Operator not found"));
 
         System.out.println("inserted Operator : " + operator);
+        list.add(operator);
     }
 
     @Test
@@ -119,7 +120,7 @@ public class OperatorServiceTest {
     public void searchAll() {
         OperatorSearchDto dto = OperatorSearchDto
                 .builder()
-                //.status(OperatorStatus.STANDBY)
+                .status(OperatorStatus.STANDBY)
                 .companyId(Long.parseLong("71"))
                 .build();
 

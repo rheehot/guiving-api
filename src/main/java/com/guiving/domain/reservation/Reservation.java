@@ -9,11 +9,13 @@ import com.guiving.domain.operator.Operator;
 import com.guiving.domain.user.User;
 import com.guiving.domain.vehicle.Vehicle;
 import com.guiving.vo.enums.GuiverType;
+import com.guiving.vo.enums.ServiceType;
 import com.guiving.vo.enums.status.ReservationStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.commons.lang3.ObjectUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -63,6 +65,9 @@ public class Reservation implements Serializable {
     private Vehicle vehicle;
 
     @Column(name = "res_update_time")
+    private LocalDateTime updateTime;
+
+    @Column(name = "res_reg_time")
     private LocalDateTime regTime;
 
     @Column(name = "res_total_cost")
@@ -70,6 +75,12 @@ public class Reservation implements Serializable {
 
     @Column(name="res_status")
     private ReservationStatus status;
+
+    @Column(name="res_air_idx")
+    private Long airpick;
+
+    @Column(name="res_seaters")
+    private Integer numberOfPersons;
 
     @Column(name="exc_set_idx")
     private Long setIdx;
@@ -81,6 +92,17 @@ public class Reservation implements Serializable {
     @OneToMany
     @JoinColumn(name = "res_idx")
     private Set<Guiving> guivingSet = new LinkedHashSet<>();
+
+    @Transient
+    private ServiceType serviceType;
+
+    @PostLoad
+    public void setServiceType(){
+        if(ObjectUtils.isNotEmpty(this.airpick))
+            this.serviceType = ServiceType.AIRPICK;
+        else
+            this.serviceType = ServiceType.GUIVING;
+    }
 
     @Builder
     public Reservation(User user, City city, Car car,

@@ -10,6 +10,7 @@ import com.guiving.web.dto.company.CompanyResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.time.LocalDate;
 
@@ -30,6 +31,8 @@ public class OperatorResponseDto {
 
     @Builder
     public OperatorResponseDto(Operator operator) {
+        if(ObjectUtils.isEmpty(operator))
+            return;
         this.id = operator.getId();
         this.name = operator.getName();
         this.email = operator.getEmail();
