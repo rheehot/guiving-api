@@ -123,7 +123,7 @@ public class Guiver {
     @Column(name = "guiver_fee_grade")
     private Long feeGrade;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "guiver_fee_grade", referencedColumnName = "guiver_fee_grade", insertable = false, updatable = false)
     private GuiverFee fee;
 
