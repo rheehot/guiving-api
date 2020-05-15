@@ -20,10 +20,10 @@ public class Name {
     }
 
     public String getFullName(){
-        return firstName+" " + lastName;
+        return this.firstName+" " + this.lastName;
     }
 
     public boolean isValid(){
-        return StringUtils.isNoneBlank(firstName,lastName);
+        return StringUtils.isNoneBlank(this.firstName,this.lastName);
     }
 }

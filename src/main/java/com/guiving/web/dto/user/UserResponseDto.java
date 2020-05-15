@@ -2,6 +2,7 @@ package com.guiving.web.dto.user;
 
 import com.guiving.domain.user.User;
 import com.guiving.vo.Name;
+import com.guiving.vo.PhoneNumber;
 import com.guiving.vo.Picture;
 import lombok.Getter;
 import lombok.ToString;
@@ -15,6 +16,7 @@ public class UserResponseDto {
     private Long id;
     private Name name;
     private String email;
+    private PhoneNumber phoneNumber;
     private Picture picture;
     private Set<CardResponseDto> cards;
 
@@ -26,5 +28,6 @@ public class UserResponseDto {
         this.cards = user.getCardSet().stream()
                 .map(CardResponseDto::new)
                 .collect(Collectors.toSet());
+        this.phoneNumber = user.getPhoneNumber();
     }
 }

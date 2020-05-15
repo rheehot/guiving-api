@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 public class ReservationResponseDto {
+    private Long id;
     private UserResponseDto user;
     private OperatorResponseDto operator;
     private GuiverResponseDto guiver;
@@ -25,6 +26,7 @@ public class ReservationResponseDto {
     private CityInfo cityInfo;
 
     public ReservationResponseDto(Reservation reservation) {
+        this.id = reservation.getId();
         this.user = new UserResponseDto(reservation.getUser());
         this.operator = new OperatorResponseDto(reservation.getOperator());
         this.guiver = new GuiverResponseDto(reservation.getGuiver());

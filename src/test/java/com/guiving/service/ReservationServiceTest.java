@@ -5,6 +5,7 @@ import com.guiving.vo.enums.status.ReservationStatus;
 import com.guiving.web.dto.PageRequest;
 import com.guiving.web.dto.reservation.ReservationResponseDto;
 import com.guiving.web.dto.reservation.ReservationSearchDto;
+import com.guiving.web.dto.reservation.ReservationSearchType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +38,10 @@ public class ReservationServiceTest {
     public void searchAll() {
         ReservationSearchDto dto = ReservationSearchDto
                 .builder()
-                .status(ReservationStatus.WANTED)
+                //.status(ReservationStatus.WANTED)
                 .cityCode(CityCode.MNL)
+                .searchType(ReservationSearchType.REG_USER_NAME)
+                .keyWord("jxx")
                 .build();
 
         PageRequest pageRequest = new PageRequest();
@@ -51,6 +54,6 @@ public class ReservationServiceTest {
                 x -> System.out.println("element : " + x)
         );
 
-        result.forEach(x -> assertThat(x.getStatus(),is(ReservationStatus.WANTED)));
+        result.forEach(x -> assertThat(x.getUser().getName().getFullName(),containsString("jxx")));
     }
 }
